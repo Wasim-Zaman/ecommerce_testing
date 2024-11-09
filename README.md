@@ -1,16 +1,85 @@
-# ecommerce_testing
+# Flutter E-commerce App
 
-A new Flutter project.
+A modern e-commerce application built with Flutter, featuring a clean architecture and state management using BLoC pattern.
 
-## Getting Started
+## 📱 Features
 
-This project is a starting point for a Flutter application.
+- **Product Catalog**: Browse through a wide range of products
+- **Category Navigation**: Filter products by categories
+- **Search Functionality**: Search products and categories
+- **Product Details**: View detailed product information with image carousel
+- **Favorites**: Save and manage favorite products
+- **User Profile**: Personal account management
+- **Dark Mode Support**: Seamless dark/light theme switching
+- **Responsive Design**: Works on various screen sizes
+- **Cached Images**: Efficient image loading and caching
 
-A few resources to get you started if this is your first Flutter project:
+## 🏗️ Architecture
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The project follows a clean architecture pattern with the following structure:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+lib/
+├── core/
+│ ├── constants/
+│ └── theme/
+├── cubits/
+│ ├── category/
+│ ├── favorites/
+│ ├── product/
+│ └── splash/
+├── models/
+├── view/
+│ ├── screens/
+│ └── widgets/
+└── main.dart
+
+## 🛠️ Technologies Used
+
+- **Flutter**: UI framework
+- **Bloc**: State management
+- **Carousel Slider**: Image slideshow
+- **Material Design**: UI components
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Flutter SDK (latest version)
+- Dart SDK (latest version)
+- Android Studio / VS Code
+- Android Emulator / iOS Simulator
+
+### Installation
+
+1. Clone the repository:
+
+git clone https://github.com/wasim-zaman/ecommerce_testing.git
+
+## 🎯 State Management
+
+The app uses BLoC pattern with Cubit for state management:
+
+- `ProductsCubit`: Manages product listing and filtering
+- `CategoriesCubit`: Handles category operations
+- `FavoritesCubit`: Manages favorite products
+- `SplashCubit`: Controls app initialization
+
+## 🎨 Theming
+
+The app supports both light and dark themes with a custom design system:
+
+- Custom color palette
+- Typography system
+- Consistent component styling
+- iOS-style adaptations
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👤 Author
+
+Wasim Zaman
+
+- Email: wasimxaman13@gmail.com
+- GitHub: [@wasim-zaman](https://github.com/yourgithubusername)
