@@ -1,3 +1,4 @@
+import 'package:ecommerce_testing/view/screens/products_by_category_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/category_model.dart';
@@ -24,21 +25,19 @@ class CategoryCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          // TODO: Navigate to category products
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  ProductsByCategoryScreen(category: category),
+            ),
+          );
         },
         child: Stack(
           fit: StackFit.expand,
           children: [
             // Category Image
-            Image.asset(
-              'assets/images/categories/${category.slug}.jpg',
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Theme.of(context).primaryColor,
-                );
-              },
-            ),
+            const Icon(Icons.image_outlined, size: 60),
             // Gradient Overlay
             Container(
               decoration: BoxDecoration(
@@ -54,8 +53,8 @@ class CategoryCard extends StatelessWidget {
             ),
             // Category Name
             Positioned(
-              left: 12,
-              bottom: 12,
+              left: 20,
+              bottom: 20,
               child: Text(
                 _formatCategoryName(category.name),
                 style: const TextStyle(

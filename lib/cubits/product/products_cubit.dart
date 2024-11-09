@@ -71,4 +71,41 @@ class ProductsCubit extends Cubit<ProductsState> {
       ));
     }
   }
+
+  Future<void> fetchProductsByCategory(String category) async {
+    emit(state.copyWith(status: ProductsStatus.loading));
+
+    try {
+      if (state.products.isEmpty) {
+        // If products haven't been loaded yet, fetch them first
+        final products = await _repository.getProducts();
+        final filteredProducts = products
+            .where((product) =>
+                product.category.toLowerCase() == category.toLowerCase())
+            .toList();
+
+        emit(state.copyWith(
+          status: ProductsStatus.success,
+          products: products,
+          filteredProducts: filteredProducts,
+        ));
+      } else {
+        // Filter existing products
+        final filteredProducts = state.products
+            .where((product) =>
+                product.category.toLowerCase() == category.toLowerCase())
+            .toList();
+
+        emit(state.copyWith(
+          status: ProductsStatus.success,
+          filteredProducts: filteredProducts,
+        ));
+      }
+    } catch (e) {
+      emit(state.copyWith(
+        status: ProductsStatus.error,
+        error: e.toString(),
+      ));
+    }
+  }
 }
