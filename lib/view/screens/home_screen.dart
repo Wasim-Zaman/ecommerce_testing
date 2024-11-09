@@ -1,6 +1,7 @@
 import 'package:ecommerce_testing/view/screens/categories_screen.dart';
 import 'package:ecommerce_testing/view/screens/favorites_screen.dart';
 import 'package:ecommerce_testing/view/screens/products_screen.dart';
+import 'package:ecommerce_testing/view/screens/user_settings_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const ProductsScreen(),
     const CategoriesScreen(),
     const FavoritesScreen(),
-    const Center(child: Text('My Account')),
+    const UserSettingsScreen(),
   ];
 
   @override
