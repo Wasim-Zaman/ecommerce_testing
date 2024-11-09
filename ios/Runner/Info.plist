@@ -45,5 +45,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>.SF Pro Display</string>
+		<string>.SF Pro Text</string>
+	</array>
 </dict>
 </plist>
