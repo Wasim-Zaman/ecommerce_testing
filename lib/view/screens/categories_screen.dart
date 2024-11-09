@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../cubits/category/categories_cubit.dart';
 import '../widgets/category_card.dart';
+import '../widgets/search_text_field.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
@@ -37,47 +38,11 @@ class CategoriesView extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               // Search Bar
-              Container(
-                height: 48,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).inputDecorationTheme.fillColor,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: TextField(
-                  onChanged: (value) {
-                    context.read<CategoriesCubit>().searchCategories(value);
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Search categories...',
-                    hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey[600],
-                        ),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.grey[600],
-                      size: 20,
-                    ),
-                    border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(
-                        color: Colors.grey[300]!,
-                        width: 1,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(
-                        color: Theme.of(context).primaryColor,
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                ),
+              SearchTextField(
+                hintText: 'Search categories...',
+                onChanged: (value) {
+                  context.read<CategoriesCubit>().searchCategories(value);
+                },
               ),
               const SizedBox(height: 8),
               // Results count
