@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class ApiService {
   static const String baseUrl = 'https://dummyjson.com';
 
-  Future<Map<String, dynamic>> get(String endpoint) async {
+  Future<dynamic> get(String endpoint) async {
     try {
       final response = await http.get(Uri.parse('$baseUrl/$endpoint'));
 

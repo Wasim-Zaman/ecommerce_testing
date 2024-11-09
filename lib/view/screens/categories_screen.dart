@@ -1,27 +1,23 @@
-import 'package:ecommerce_testing/cubits/product/products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../widgets/product_card.dart';
+import '../../cubits/category/categories_cubit.dart';
+import '../widgets/category_card.dart';
 
-class ProductsScreen extends StatelessWidget {
-  const ProductsScreen({super.key});
+class CategoriesScreen extends StatelessWidget {
+  const CategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) {
-        final cubit = ProductsCubit();
-        cubit.fetchProducts();
-        return cubit;
-      },
-      child: const ProductsView(),
+      create: (context) => CategoriesCubit()..fetchCategories(),
+      child: const CategoriesView(),
     );
   }
 }
 
-class ProductsView extends StatelessWidget {
-  const ProductsView({super.key});
+class CategoriesView extends StatelessWidget {
+  const CategoriesView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +29,7 @@ class ProductsView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Products',
+                'Categories',
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
@@ -49,10 +45,10 @@ class ProductsView extends StatelessWidget {
                 ),
                 child: TextField(
                   onChanged: (value) {
-                    context.read<ProductsCubit>().searchProducts(value);
+                    context.read<CategoriesCubit>().searchCategories(value);
                   },
                   decoration: InputDecoration(
-                    hintText: 'Search products...',
+                    hintText: 'Search categories...',
                     hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.grey[600],
                         ),
@@ -85,30 +81,37 @@ class ProductsView extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               // Results count
-              BlocBuilder<ProductsCubit, ProductsState>(
+              BlocBuilder<CategoriesCubit, CategoriesState>(
                 builder: (context, state) {
                   return Text(
-                    '${state.filteredProducts.length} results found',
+                    '${state.filteredCategories.length} categories found',
                     style: TextStyle(color: Colors.grey[600]),
                   );
                 },
               ),
               const SizedBox(height: 16),
-              // Products List
+              // Categories Grid
               Expanded(
-                child: BlocBuilder<ProductsCubit, ProductsState>(
+                child: BlocBuilder<CategoriesCubit, CategoriesState>(
                   builder: (context, state) {
-                    if (state.status == ProductsStatus.loading) {
+                    if (state.status == CategoriesStatus.loading) {
                       return const Center(child: CircularProgressIndicator());
                     }
-                    if (state.status == ProductsStatus.error) {
+                    if (state.status == CategoriesStatus.error) {
                       return Center(child: Text(state.error!));
                     }
-                    return ListView.builder(
-                      itemCount: state.filteredProducts.length,
+                    return GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,
+                        childAspectRatio: 1.1,
+                      ),
+                      itemCount: state.filteredCategories.length,
                       itemBuilder: (context, index) {
-                        final product = state.filteredProducts[index];
-                        return ProductCard(product: product);
+                        final category = state.filteredCategories[index];
+                        return CategoryCard(category: category);
                       },
                     );
                   },

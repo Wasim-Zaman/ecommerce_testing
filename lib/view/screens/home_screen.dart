@@ -1,3 +1,4 @@
+import 'package:ecommerce_testing/view/screens/categories_screen.dart';
 import 'package:ecommerce_testing/view/screens/products_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _screens = [
     const ProductsScreen(),
-    const Center(child: Text('Categories')),
+    const CategoriesScreen(),
     const Center(child: Text('Favourites')),
     const Center(child: Text('My Account')),
   ];
