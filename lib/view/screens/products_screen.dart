@@ -10,14 +10,7 @@ class ProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        final cubit = ProductsCubit();
-        cubit.fetchProducts();
-        return cubit;
-      },
-      child: const ProductsView(),
-    );
+    return const ProductsView();
   }
 }
 

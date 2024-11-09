@@ -10,10 +10,7 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CategoriesCubit()..fetchCategories(),
-      child: const CategoriesView(),
-    );
+    return const CategoriesView();
   }
 }
 

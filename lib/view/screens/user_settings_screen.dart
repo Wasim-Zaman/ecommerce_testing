@@ -76,7 +76,7 @@ class UserSettingsScreen extends StatelessWidget {
               // Settings Options
               _buildSettingOption(
                 icon: Icons.settings,
-                title: 'Kontoinställningar',
+                title: 'Kontoinstallningar',
                 onTap: () {},
               ),
               _buildSettingOption(

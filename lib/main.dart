@@ -1,4 +1,6 @@
+import 'package:ecommerce_testing/cubits/category/categories_cubit.dart';
 import 'package:ecommerce_testing/cubits/favorites/favorites_cubit.dart';
+import 'package:ecommerce_testing/cubits/product/products_cubit.dart';
 import 'package:ecommerce_testing/cubits/splash/splash_cubit.dart';
 import 'package:ecommerce_testing/view/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => FavoritesCubit()),
+        BlocProvider(create: (context) => ProductsCubit()..fetchProducts()),
+        BlocProvider(create: (context) => CategoriesCubit()..fetchCategories()),
       ],
       child: MaterialApp(
         title: 'My Store',

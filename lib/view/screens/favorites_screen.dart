@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../cubits/favorites/favorites_cubit.dart';
+import '../widgets/search_text_field.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
@@ -33,22 +34,11 @@ class FavoritesView extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               // Search Bar
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[300]!),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: TextField(
-                  onChanged: (value) {
-                    context.read<FavoritesCubit>().searchFavorites(value);
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Apple',
-                    prefixIcon: const Icon(Icons.search),
-                    border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                  ),
-                ),
+              SearchTextField(
+                hintText: 'Apple',
+                onChanged: (value) {
+                  context.read<FavoritesCubit>().searchFavorites(value);
+                },
               ),
               const SizedBox(height: 8),
               BlocBuilder<FavoritesCubit, FavoritesState>(
