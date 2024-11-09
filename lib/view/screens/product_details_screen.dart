@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../cubits/favorites/favorites_cubit.dart';
 import '../../models/product_model.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -56,14 +58,26 @@ class ProductDetailsScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      IconButton(
-                        onPressed: () {
-                          // TODO: Implement favorites
+                      BlocBuilder<FavoritesCubit, FavoritesState>(
+                        builder: (context, state) {
+                          final isFavorite = context
+                              .read<FavoritesCubit>()
+                              .isFavorite(product);
+                          return IconButton(
+                            onPressed: () {
+                              context
+                                  .read<FavoritesCubit>()
+                                  .toggleFavorite(product);
+                            },
+                            icon: Icon(
+                              isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              size: 28,
+                              color: isFavorite ? Colors.red : null,
+                            ),
+                          );
                         },
-                        icon: const Icon(
-                          Icons.favorite_border,
-                          size: 28,
-                        ),
                       ),
                     ],
                   ),

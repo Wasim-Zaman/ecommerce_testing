@@ -1,3 +1,4 @@
+import 'package:ecommerce_testing/cubits/favorites/favorites_cubit.dart';
 import 'package:ecommerce_testing/cubits/splash/splash_cubit.dart';
 import 'package:ecommerce_testing/view/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +15,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My Store',
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      home: BlocProvider(
-        create: (context) => SplashCubit()..initializeApp(),
-        child: const SplashScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => FavoritesCubit()),
+      ],
+      child: MaterialApp(
+        title: 'My Store',
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.system,
+        home: BlocProvider(
+          create: (context) => SplashCubit()..initializeApp(),
+          child: const SplashScreen(),
+        ),
       ),
     );
   }
