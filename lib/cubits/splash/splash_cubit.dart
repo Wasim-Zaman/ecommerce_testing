@@ -8,7 +8,10 @@ class SplashCubit extends Cubit<SplashState> {
   Future<void> initializeApp() async {
     emit(SplashState.loading);
 
+    // Simulate initialization delay
     await Future.delayed(const Duration(seconds: 2));
+
+    // Add any initialization logic here (e.g., checking auth status, loading initial data)
 
     emit(SplashState.completed);
   }
