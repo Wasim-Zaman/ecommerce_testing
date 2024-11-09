@@ -38,6 +38,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   google_fonts: ^6.2.1
   http: ^1.2.2
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
