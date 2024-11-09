@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../cubits/favorites/favorites_cubit.dart';
 import '../widgets/search_text_field.dart';
+import 'product_details_screen.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
@@ -65,91 +66,93 @@ class FavoritesView extends StatelessWidget {
                         return Container(
                           margin: const EdgeInsets.only(bottom: 16),
                           padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.1),
-                                spreadRadius: 1,
-                                blurRadius: 4,
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              // Product Image
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.network(
-                                  product.thumbnail,
-                                  width: 80,
-                                  height: 80,
-                                  fit: BoxFit.cover,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ProductDetailsScreen(product: product),
                                 ),
-                              ),
-                              const SizedBox(width: 12),
-                              // Product Details
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      product.title,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      '\$${product.price}',
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          product.rating.toString(),
-                                          style: const TextStyle(fontSize: 14),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                // Product Image
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.network(
+                                    product.thumbnail,
+                                    width: 80,
+                                    height: 80,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                // Product Details
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        product.title,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        const SizedBox(width: 4),
-                                        Row(
-                                          children: List.generate(
-                                            5,
-                                            (index) => Icon(
-                                              Icons.star,
-                                              size: 16,
-                                              color:
-                                                  index < product.rating.floor()
-                                                      ? Colors.amber
-                                                      : Colors.grey[300],
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        '\$${product.price}',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            product.rating.toString(),
+                                            style:
+                                                const TextStyle(fontSize: 14),
+                                          ),
+                                          const SizedBox(width: 4),
+                                          Row(
+                                            children: List.generate(
+                                              5,
+                                              (index) => Icon(
+                                                Icons.star,
+                                                size: 16,
+                                                color: index <
+                                                        product.rating.floor()
+                                                    ? Colors.amber
+                                                    : Colors.grey[300],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              // Favorite Button
-                              IconButton(
-                                onPressed: () {
-                                  context
-                                      .read<FavoritesCubit>()
-                                      .toggleFavorite(product);
-                                },
-                                icon: const Icon(
-                                  Icons.favorite,
-                                  color: Colors.red,
+                                // Favorite Button
+                                IconButton(
+                                  onPressed: () {
+                                    context
+                                        .read<FavoritesCubit>()
+                                        .toggleFavorite(product);
+                                  },
+                                  icon: const Icon(
+                                    Icons.favorite,
+                                    color: Colors.red,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         );
                       },
